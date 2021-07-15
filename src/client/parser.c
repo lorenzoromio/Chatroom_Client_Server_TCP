@@ -8,7 +8,7 @@
 error_t parserOpzioni(int key, char *arg, struct argp_state *state)
 {
     clientConfig *config = state->input;
-    char ip[100];
+    char ip[45]; //Lunghezza massima iPv6
 
 
     switch (key)
