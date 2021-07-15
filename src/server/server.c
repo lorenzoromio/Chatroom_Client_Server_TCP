@@ -51,9 +51,8 @@ int main(int argc, char **argv)
     int                status;
     pthread_t          threadId;
 
-    
-//    increaseLogLevel();
-//    increaseLogLevel();
+    //    increaseLogLevel();
+    //    increaseLogLevel();
 
     // Gestione dei segnali attraverso una funzione definita
     signal(SIGINT, signalHandler);
@@ -146,6 +145,11 @@ int main(int argc, char **argv)
     printf("=== WELCOME TO THE CHATROOM SERVER ===\n");
     printf("Listening for connection on %s:%d\n",
            config.host, config.port);
+    printf("\n"
+        "? -- Print this menu\n"
+        "p -- Print room list\n"
+        "c -- Clear screen\n"
+        "q -- Quit\n");
 
     // TODO remove me
     // printf("Use  \"./client %s %d\" or \"telnet %s -p %d\" for connecet\n",
@@ -218,7 +222,7 @@ void *handleServerCommand()
                 "? -- Print this menu\n"
                 "p -- Print room list\n"
                 "c -- Clear screen\n"
-                "q -- Quit\n");
+                "q -- Quit\n\n");
             break;
         case '\n':
             printf(CURSOR_UP);
@@ -330,7 +334,7 @@ void *handleClient(void *arg)
 
         int receive = recv(user->sock_fd, buffer, BUFFER_SIZE, 0);
 
-        printf(GRAY"[Thread = %li] "RESET, syscall(SYS_gettid));
+        printf(GRAY "[Thread = %li] " RESET, syscall(SYS_gettid));
         fflush(stdout);
         strcpy(buffer, stripString(buffer));
         if (receive > 0)
