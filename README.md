@@ -19,8 +19,7 @@ porta specificati nelle opzioni, o su quelle di default.
 Usage: server \[-?\] \[-h IP\] \[-p PORT\] \[\--host=IP\]
 \[\--port=PORT\]
 
-![](./media/image1.png){width="5.905511811023622in"
-height="0.7668908573928259in"} *Figura 1 -- server all'avvio*
+![](./media/image1.png) *Figura 1 -- server all'avvio*
 
 Il client in multithread gestisce l'invio e la ricezione dei messaggi.
 
