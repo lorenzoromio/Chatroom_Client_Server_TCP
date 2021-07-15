@@ -1,7 +1,8 @@
 Progetto di Reti di Calcolatori
+===============================
 
 *Chatroom TCP client / server multi-thread*
-
+-------------------------------------------
 Introduzione
 ============
 
@@ -16,8 +17,7 @@ chiamando la subroutine *handleClient* in un thread separato.
 Dopodiché si mette in ascolto per connessioni in entrata all'indirizzo e
 porta specificati nelle opzioni, o su quelle di default.
 
-Usage: server \[-?\] \[-h IP\] \[-p PORT\] \[\--host=IP\]
-\[\--port=PORT\]
+Usage: server \[-?\] \[-h IP\] \[-p PORT\] \[\--host=IP\]\[\--port=PORT\]
 
 ![](./media/image1.png)
 
@@ -29,9 +29,7 @@ Se la connessione va a buon fine il server crea un utente con uid
 univoco e username a scelta e lo inserisce nella stanza principale
 "General".
 
-Usage: client \[-?\] \[-d DOMAIN\] \[-h IP\] \[-p PORT\]
-
-\[\--domain=DOMAIN\] \[\--host=IP\] \[\--port=PORT\]
+Usage: client \[-?\] \[-d DOMAIN\] \[-h IP\] \[-p PORT\]\[\--domain=DOMAIN\] \[\--host=IP\] \[\--port=PORT\]
 
 ![](./media/image2.png)
 
