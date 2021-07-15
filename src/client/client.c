@@ -41,7 +41,7 @@ int main(int argc, char **argv)
     int                option;
     int                status;
 
-    // TODO: move this to cli args
+
     config.host = CONNECTION_HOST;
     config.port = CONNECTION_PORT;
     parserArgv(argc, argv, &config);
@@ -50,7 +50,7 @@ int main(int argc, char **argv)
     signal(SIGTSTP, signalHandler);
     signal(SIGQUIT, signalHandler);
 
-    // TODO: remove me
+
     //increaseLogLevel();
     //increaseLogLevel();
 

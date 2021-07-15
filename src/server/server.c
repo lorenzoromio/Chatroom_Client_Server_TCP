@@ -51,9 +51,9 @@ int main(int argc, char **argv)
     int                status;
     pthread_t          threadId;
 
-    // TODO: remove me
-    increaseLogLevel();
-    increaseLogLevel();
+    
+//    increaseLogLevel();
+//    increaseLogLevel();
 
     // Gestione dei segnali attraverso una funzione definita
     signal(SIGINT, signalHandler);
@@ -246,7 +246,7 @@ void *handleClient(void *arg)
 
     // Name
     receive = recv(user->sock_fd, buffer, MAX_USERNAME_LENGTH + 1, 0);
-    strcpy(buffer, stripString(buffer)); //FIXME
+    strcpy(buffer, stripString(buffer));
     if (receive <= 0)
     {
         perror("");
@@ -394,7 +394,7 @@ void *handleClient(void *arg)
                     strftime(timeStr, 26, "[%d/%m/%y %H:%M:%S]", tm_info);
 
                     snprintf(msg, sizeof(msg), "%s%s [%s]: " RESET "%s\n", user->color, timeStr, user->username, buffer);
-                   // printf("[%s] %s", user->room->name, msg);
+                    printf("[%s] %s", user->room->name, msg);
                     sendBroadcastMessage(msg, user);
                 }
                 bzero(msg, sizeof(msg));
@@ -636,7 +636,7 @@ int cleanEmptyRooms(room_list *roomList)
 {
     if (roomList->roomCount < MAX_ROOM_COUNT)
     {
-        logInfo("list not full");
+        logDebug("list not full");
         return 1; //if list not full
     }
 
@@ -646,7 +646,7 @@ int cleanEmptyRooms(room_list *roomList)
         if (room->userList->count == 0)
         {
             removeRoomFromList(roomList, room);
-            logInfo("One room removed, now there's space");
+            logDebug("One room removed, now there's space");
             return TRUE; //if there at least one room empty
         }
     }
