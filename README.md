@@ -19,12 +19,7 @@ porta specificati nelle opzioni, o su quelle di default.
 Usage: server \[-?\] \[-h IP\] \[-p PORT\] \[\--host=IP\]
 \[\--port=PORT\]
 
-<<<<<<< HEAD
-![](./media/image1.png){width="5.905511811023622in"
-height="0.7668908573928259in"}
-=======
-![](./media/image1.png) *Figura 1 -- server all'avvio*
->>>>>>> 578868209a868aca1087d56b73f99133da4b68f8
+![](./media/image1.png)
 
 Il client in multithread gestisce l'invio e la ricezione dei messaggi.
 
@@ -38,8 +33,7 @@ Usage: client \[-?\] \[-d DOMAIN\] \[-h IP\] \[-p PORT\]
 
 \[\--domain=DOMAIN\] \[\--host=IP\] \[\--port=PORT\]
 
-![](./media/image2.png){width="5.905511811023622in"
-height="0.7422025371828521in"}
+![](./media/image2.png)
 
 Configurazione lato Server
 ==========================
@@ -56,8 +50,7 @@ vengono assegnati ai valori specificati come opzioni *---host* e
 in *"parser.h".*
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image3.png){width="6.775in"
-height="2.463888888888889in"}
+automaticamente](./media/image3.png)
 
 Opzioni socket
 --------------
@@ -66,8 +59,7 @@ Tramite *setsockopt* vengono settate le opzioni della socket per la
 dimensione del buffer di invio *SO\_SNDBUF* e di ricezione *SO\_RCVBUF.*
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image4.png){width="6.775in"
-height="1.1388888888888888in"}
+automaticamente](./media/image4.png)
 
 Bind
 ----
@@ -76,8 +68,7 @@ Eseguo la *bind* della socket all'indirizzo e porta specificati e la
 preparo ad accettare connessioni tramite *listen.*
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image5.png){width="6.775in"
-height="2.3229166666666665in"}
+automaticamente](./media/image5.png)
 
 Accept
 ------
@@ -87,9 +78,7 @@ una nuova socket, *client\_sd* e assegna a *client\_addr* l'indirizzo
 del client che si sta connettendo.
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image6.png){width="6.775in"
-height="1.1104166666666666in"}
-
+automaticamente](./media/image6.png)
 Handle Client
 -------------
 
@@ -100,8 +89,7 @@ dei messaggi, interpreta i comandi e inoltra i messaggi agli utenti
 interessati.
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image7.png){width="6.775in"
-height="1.3381944444444445in"}
+automaticamente](./media/image7.png)
 
 Configurazione lato Client
 ==========================
@@ -117,7 +105,8 @@ specificati come opzioni *---host* ( o *---domain* che verrà tradotto in
 un host tramite *resolveHostname* ) e *---port* gestite dal parser
 tramite la funzione *parserArgv* definita in *"parser.h".*
 
-![Immagine che contiene testo Descrizione generata automaticamente](./media/image8.png){width="6.775in" height="2.3006944444444444in"} Opzioni socket
+![Immagine che contiene testo Descrizione generata automaticamente](./media/image8.png) 
+Opzioni socket
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
 Tramite *setsockopt* vengono settate le opzioni della socket per la
@@ -125,8 +114,7 @@ dimensione del buffer di invio *SO*\_*SNDBUF* e di ricezione
 *SO*\_*RCVBUF*
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image9.png){width="6.775in"
-height="1.1180555555555556in"}
+automaticamente](./media/image9.png)
 
 Connect
 -------
@@ -134,8 +122,7 @@ Connect
 Il client apre una connessione verso il server.
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image10.png){width="6.775in"
-height="1.6826388888888888in"}
+automaticamente](./media/image10.png)
 
 Send
 ----
@@ -145,8 +132,7 @@ Tramite la funzione *getCurrentStdin* e con gli opportuni controlli di
 lunghezza dell'input preleviamo l'username da *stdin* e con *send* lo
 mandiamo al server
 
-![](./media/image11.png){width="6.775in" height="0.7152777777777778in"}
-
+![](./media/image11.png)
 Message Handler
 ---------------
 
@@ -161,8 +147,7 @@ ricezione, dopodiché si interrompe l'esecuzione del programma, l'utente
 chiude la socket ed esce dal server.
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image12.png){width="6.775in"
-height="1.895138888888889in"}
+automaticamente](./media/image12.png)
 
 Implementazione chat
 ====================
@@ -174,7 +159,7 @@ All'avvio il server inizializza la lista delle stanze inserendo una
 stanza "General" e un utente "Admin" come amministratore della stanza di
 default.
 
-![](./media/image13.png){width="6.775in" height="0.5083333333333333in"}
+![](./media/image13.png)
 
 *roomList* è un nodo sentinella che contiene il numero di stanze
 presenti nel server, due puntatori alla testa e alla coda della lista e
@@ -182,8 +167,7 @@ un *mutex* per consentire l'accesso alla lista delle stanze in mutua
 esclusione tra i vari thread, per evitare race conditions.
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image14.png){width="6.775in"
-height="1.9215277777777777in"}
+automaticamente](./media/image14.png)
 
 Dopo l'inizializzazione la testa della lista punterà alla stanza
 "General" che verrà usata come stanza di default, inserita nella lista
@@ -196,13 +180,12 @@ come "(room-\>name).log" e puntatori alla stanza precedente e successiva
 nella lista.
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image15.png){width="6.775in"
-height="2.5243055555555554in"}
+automaticamente](./media/image15.png)
 
 Alla creazione di una stanza la sua lista utenti viene inizializzata,
 allocando memoria, tramite la funzione *initializeUserList*
 
-![](./media/image16.png){width="6.775in" height="0.5465277777777777in"}
+![](./media/image16.png)
 
 User Structure
 --------------
@@ -214,8 +197,7 @@ stanza in mutua esclusione tra i vari thread, per evitare race
 conditions.
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image17.png){width="6.775in"
-height="1.9270833333333333in"}
+automaticamente](./media/image17.png)
 
 Ogni utente un uid univoco, un username, un colore con cui verrà
 visualizzato dagli altri utenti (inizializzato random tra una lista di
@@ -225,8 +207,7 @@ corrispondente, un puntatore alla stanza a cui appartiene e puntatori
 all'utente precedente e successivo nella lista.
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image18.png){width="6.775in"
-height="2.691666666666667in"}
+automaticamente](./media/image18.png)
 
 Il server permette un certo numero di utenti, definito in
 *MAX\_CLIENT\_COUNT*.
@@ -238,12 +219,11 @@ l'accesso e chiude la socket.\
 Il client, non ricevendo la conferma di connessione, saprà che il server
 è pieno e terminerà l'esecuzione stampando un messaggio di errore.
 
-![](./media/image19.png){width="5.905511811023622in"
-height="0.4612051618547682in"}
+![](./media/image19.png)
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image20.png){width="6.775in"
-height="3.1034722222222224in"}All'accesso l'utente viene inserito nella
+automaticamente](./media/image20.png)
+All'accesso l'utente viene inserito nella
 stanza "*General*".
 
 SendMessage
@@ -254,8 +234,7 @@ tramite la funzione *send* presente in *"socket.h"* prova ad inviarlo al
 socket file descriptor dell'utente.
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image21.png){width="6.775in"
-height="2.841666666666667in"}
+automaticamente](./media/image21.png)
 
 SendBroadcastMessage
 --------------------
@@ -266,8 +245,7 @@ stesso, e tramite *keepLog* salva il messaggio nel file di log della
 stanza.
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image22.png){width="6.775in"
-height="2.722916666666667in"}
+automaticamente](./media/image22.png)
 
 Restore Log
 -----------
@@ -276,8 +254,7 @@ Con il comando */restore* l'utente può ricevere dal server l'elenco di
 tutti i messaggi mandati in quella stanza prima che vi entrasse.
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image23.png){width="6.775in"
-height="3.2979166666666666in"}
+automaticamente](./media/image23.png)
 
 Print Room List
 ---------------
@@ -286,8 +263,7 @@ Con il comando /rooms l'utente può stampare la lista di stanza
 disponibili con i vari utenti connessi. La propria stanza e il proprio
 username verranno evidenziati nel messaggio.
 
-![](./media/image24.png){width="5.905511811023622in"
-height="1.5265944881889764in"}
+![](./media/image24.png)
 
 New Room
 --------
@@ -305,8 +281,7 @@ Se il server ha già raggiunto il numero di stanze massimo tutte
 contengono almeno un utente non sarà possibile creare una nuova stanza.
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image25.png){width="6.775in"
-height="4.509027777777778in"}
+automaticamente](./media/image25.png)
 
 Change Room
 -----------
@@ -322,8 +297,7 @@ appartiene, notificando gli altri utenti della cosa, e verrà inserito
 nella stanza da lui scelta.
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image26.png){width="6.775in"
-height="3.3159722222222223in"}
+automaticamente](./media/image26.png)
 
 Delete Room
 -----------
@@ -336,8 +310,7 @@ L'admin può eliminare ogni stanza. Nessuno, compreso l'admin, può
 eliminare la stanza di default.
 
 ![Immagine che contiene testo, monitor, nero, screenshot Descrizione
-generata automaticamente](./media/image27.png){width="6.775in"
-height="2.6979166666666665in"}
+generata automaticamente](./media/image27.png)
 
 Exit
 ----
@@ -349,64 +322,4 @@ dal server. Durante la fase di logOut viene rimosso dalla stanza in cui
 all'utente Admin
 
 ![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image28.png){width="6.775in"
-height="3.698611111111111in"}
-
-Sommario {#sommario .Titolosommario}
-========
-
-[[Introduzione]{.underline} 1](#introduzione)
-
-[[Configurazione lato Server]{.underline}
-2](#configurazione-lato-server)
-
-[[Creazione socket]{.underline} 2](#creazione-socket)
-
-[[Opzioni socket]{.underline} 2](#opzioni-socket)
-
-[[Bind]{.underline} 2](#bind)
-
-[[Accept]{.underline} 3](#accept)
-
-[[Handle Client]{.underline} 3](#handle-client)
-
-[[Configurazione lato Client]{.underline}
-4](#configurazione-lato-client)
-
-[[Creazione socket]{.underline} 4](#creazione-socket-1)
-
-[[Opzioni socket]{.underline}
-4](#immagine-che-contiene-testo-descrizione-generata-automaticamente-opzioni-socket)
-
-[[Connect]{.underline} 4](#connect)
-
-[[Send]{.underline} 5](#send)
-
-[[Message Handler]{.underline} 5](#message-handler)
-
-[[Implementazione chat]{.underline} 6](#implementazione-chat)
-
-[[Room structure]{.underline} 6](#room-structure)
-
-[[User Structure]{.underline} 7](#user-structure)
-
-[[SendMessage]{.underline} 8](#sendmessage)
-
-[[SendBroadcastMessage]{.underline} 9](#sendbroadcastmessage)
-
-[[Restore Log]{.underline} 9](#restore-log)
-
-[[Print Room List]{.underline} 10](#print-room-list)
-
-[[New Room]{.underline} 10](#new-room)
-
-[[Change Room]{.underline} 11](#change-room)
-
-[[Delete Room]{.underline} 11](#delete-room)
-
-[[Exit]{.underline} 12](#exit)
-
-[\
-\
-\
-]{.underline}
+automaticamente](./media/image28.png)
