@@ -7,7 +7,6 @@
 #define MAX_CLIENT_COUNT 1000
 #define ROOM_SIZE        250
 
-
 typedef struct room_list
 {
     volatile unsigned int roomCount;
@@ -21,13 +20,13 @@ typedef struct room_list
 // Struttura della stanza
 typedef struct room_s
 {
-    uid_t              uid;
-    char               name[25];
-    struct user_s *    owner;
-    struct user_list * userList;
-    char               log_filename[30];
-    struct room_s *    next;
-    struct room_s *    prev;
+    uid_t             uid;
+    char              name[25];
+    struct user_s *   owner;
+    struct user_list *userList;
+    char              log_filename[30];
+    struct room_s *   next;
+    struct room_s *   prev;
 } room_t;
 
 // Struttura dell'utente
@@ -43,15 +42,13 @@ typedef struct user_list
 typedef struct user_s
 {
     uid_t              uid;
-    char               *username;
-    char               *color;
+    char *             username;
+    char *             color;
     int                sock_fd;
     struct sockaddr_in addr;
     struct room_s *    room;
     struct user_s *    next;
     struct user_s *    prev;
-    //char               ip_port[21];
-
 } user_t;
 
 //ROOM FUNCTIONS
