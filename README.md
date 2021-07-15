@@ -77,6 +77,7 @@ del client che si sta connettendo.
 
 ![Immagine che contiene testo Descrizione generata
 automaticamente](./media/image6.png)
+
 Handle Client
 -------------
 
