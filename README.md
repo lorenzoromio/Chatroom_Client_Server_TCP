@@ -47,8 +47,7 @@ vengono assegnati ai valori specificati come opzioni *---host* e
 *---port* gestite dal parser tramite la funzione *parserArgv* definita
 in *"parser.h".*
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image3.png)
+![](./media/image3.png)
 
 Opzioni socket
 --------------
@@ -56,8 +55,7 @@ Opzioni socket
 Tramite *setsockopt* vengono settate le opzioni della socket per la
 dimensione del buffer di invio *SO\_SNDBUF* e di ricezione *SO\_RCVBUF.*
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image4.png)
+![](./media/image4.png)
 
 Bind
 ----
@@ -65,8 +63,7 @@ Bind
 Eseguo la *bind* della socket all'indirizzo e porta specificati e la
 preparo ad accettare connessioni tramite *listen.*
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image5.png)
+![](./media/image5.png)
 
 Accept
 ------
@@ -75,8 +72,7 @@ Accept
 una nuova socket, *client\_sd* e assegna a *client\_addr* l'indirizzo
 del client che si sta connettendo.
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image6.png)
+![](./media/image6.png)
 
 Handle Client
 -------------
@@ -87,8 +83,7 @@ thread chiamando la funzione *handleClient* che si occupa della gestione
 dei messaggi, interpreta i comandi e inoltra i messaggi agli utenti
 interessati.
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image7.png)
+![](./media/image7.png)
 
 Configurazione lato Client
 ==========================
@@ -104,7 +99,8 @@ specificati come opzioni *---host* ( o *---domain* che verrà tradotto in
 un host tramite *resolveHostname* ) e *---port* gestite dal parser
 tramite la funzione *parserArgv* definita in *"parser.h".*
 
-![Immagine che contiene testo Descrizione generata automaticamente](./media/image8.png) 
+![](./media/image8.png) 
+
 Opzioni socket
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -112,16 +108,14 @@ Tramite *setsockopt* vengono settate le opzioni della socket per la
 dimensione del buffer di invio *SO*\_*SNDBUF* e di ricezione
 *SO*\_*RCVBUF*
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image9.png)
+![](./media/image9.png)
 
 Connect
 -------
 
 Il client apre una connessione verso il server.
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image10.png)
+![](./media/image10.png)
 
 Send
 ----
@@ -132,6 +126,7 @@ lunghezza dell'input preleviamo l'username da *stdin* e con *send* lo
 mandiamo al server
 
 ![](./media/image11.png)
+
 Message Handler
 ---------------
 
@@ -145,8 +140,7 @@ Tramite una *pthread*\_*join* si attende la terminazione del thread di
 ricezione, dopodiché si interrompe l'esecuzione del programma, l'utente
 chiude la socket ed esce dal server.
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image12.png)
+![](./media/image12.png)
 
 Implementazione chat
 ====================
@@ -165,8 +159,7 @@ presenti nel server, due puntatori alla testa e alla coda della lista e
 un *mutex* per consentire l'accesso alla lista delle stanze in mutua
 esclusione tra i vari thread, per evitare race conditions.
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image14.png)
+![](./media/image14.png)
 
 Dopo l'inizializzazione la testa della lista punterà alla stanza
 "General" che verrà usata come stanza di default, inserita nella lista
@@ -178,8 +171,7 @@ recuperare la cronologia dei messaggi (verrà inizializzato più avanti
 come "(room-\>name).log" e puntatori alla stanza precedente e successiva
 nella lista.
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image15.png)
+![](./media/image15.png)
 
 Alla creazione di una stanza la sua lista utenti viene inizializzata,
 allocando memoria, tramite la funzione *initializeUserList*
@@ -195,8 +187,7 @@ e un *mutex* per consentire l'accesso alla lista degli utenti della
 stanza in mutua esclusione tra i vari thread, per evitare race
 conditions.
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image17.png)
+![](./media/image17.png)
 
 Ogni utente un uid univoco, un username, un colore con cui verrà
 visualizzato dagli altri utenti (inizializzato random tra una lista di
@@ -205,8 +196,7 @@ struttura *sockaddr\_in* contenente l'indirizzo del client
 corrispondente, un puntatore alla stanza a cui appartiene e puntatori
 all'utente precedente e successivo nella lista.
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image18.png)
+![](./media/image18.png)
 
 Il server permette un certo numero di utenti, definito in
 *MAX\_CLIENT\_COUNT*.
@@ -220,8 +210,8 @@ Il client, non ricevendo la conferma di connessione, saprà che il server
 
 ![](./media/image19.png)
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image20.png)
+![](./media/image20.png)
+
 All'accesso l'utente viene inserito nella
 stanza "*General*".
 
@@ -232,8 +222,7 @@ La funzione *sendMessage* prende in input una stringa e un utente e
 tramite la funzione *send* presente in *"socket.h"* prova ad inviarlo al
 socket file descriptor dell'utente.
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image21.png)
+![](./media/image21.png)
 
 SendBroadcastMessage
 --------------------
@@ -243,8 +232,7 @@ utenti della stanza dell'utente che invia il messaggio, tranne che a sé
 stesso, e tramite *keepLog* salva il messaggio nel file di log della
 stanza.
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image22.png)
+![](./media/image22.png)
 
 Restore Log
 -----------
@@ -252,8 +240,7 @@ Restore Log
 Con il comando */restore* l'utente può ricevere dal server l'elenco di
 tutti i messaggi mandati in quella stanza prima che vi entrasse.
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image23.png)
+![](./media/image23.png)
 
 Print Room List
 ---------------
@@ -279,8 +266,7 @@ superiore cerca una stanza vuota da eliminare.\
 Se il server ha già raggiunto il numero di stanze massimo tutte
 contengono almeno un utente non sarà possibile creare una nuova stanza.
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image25.png)
+![](./media/image25.png)
 
 Change Room
 -----------
@@ -295,8 +281,7 @@ esistente. L'utente, quindi, verrà rimosso dalla stanza a cui
 appartiene, notificando gli altri utenti della cosa, e verrà inserito
 nella stanza da lui scelta.
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image26.png)
+![](./media/image26.png)
 
 Delete Room
 -----------
@@ -320,5 +305,4 @@ dal server. Durante la fase di logOut viene rimosso dalla stanza in cui
 è attualmente e la proprietà delle stanze che possiede verrà trasferita
 all'utente Admin
 
-![Immagine che contiene testo Descrizione generata
-automaticamente](./media/image28.png)
+![](./media/image28.png)
