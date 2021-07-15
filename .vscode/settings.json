@@ -1,0 +1,28 @@
+{
+    "files.associations": {
+        "typeinfo": "c",
+        "cctype": "c",
+        "numeric": "c",
+        "fstream": "c",
+        "istream": "c",
+        "ostream": "c",
+        "system_error": "c",
+        "server.h": "c",
+        "*.tcc": "c",
+        "chat.h": "c",
+        "limits": "c",
+        "client.h": "c",
+        "parser.h": "c",
+        "logger.h": "c",
+        "inet.h": "c",
+        "common.h": "c",
+        "functional": "c",
+        "memory": "c",
+        "optional": "c",
+        "sstream": "c",
+        "bit": "c",
+        "algorithm": "c",
+        "streambuf": "c"
+    },
+    "todo-tree.tree.showBadges": false
+}
