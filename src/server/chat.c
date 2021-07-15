@@ -177,7 +177,7 @@ void printRoomList(room_list *roomList)
     room_t *room;
     for (room = roomList->head; room; room = room->next)
     {
-        printf("[%d - %s] (%d user online) own by (%d - %s)\n",
+        printf(CYAN"[%d - %s]"RESET" (%d user online) own by (%d - %s)\n",
                room->uid, room->name, room->userList->count, room->owner->uid, room->owner->username);
         printUserList(room->userList);
     }
