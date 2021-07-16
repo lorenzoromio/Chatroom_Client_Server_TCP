@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include "../utils/common.h"
 #include <arpa/inet.h>
 #include <pthread.h>
 
