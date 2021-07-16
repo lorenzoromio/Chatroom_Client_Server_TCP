@@ -6,8 +6,11 @@ Progetto di Reti di Calcolatori
 Introduzione
 ============
 
-Il progetto consiste nella creazione di un modello client server per
-scambi di messaggi testuali tra più utenti in diverse stanze.
+Questo progetto fa parte dell'esame Reti di Calcolatori della facoltà di 
+Sicurezza Informatica della Statale di Milano.
+
+Il progetto consiste nella implementazione di un modello client server sviluppato interamente in C
+per scambi di messaggi testuali tra più utenti in diverse stanze.
 
 Client e server utilizzano socket TCP per comunicare tra loro.
 
