@@ -77,9 +77,7 @@ room_t *createRoom(char *roomName, user_t *owner)
     newRoom->uid   = room_uid++;
     newRoom->owner = owner;
     strcpy(newRoom->name, roomName);
-    logError("");
     snprintf(newRoom->log_filename,sizeof(newRoom->log_filename),"%s/%s.log",LOG_FOLDER,roomName);
-    printf("%s\n",newRoom->log_filename);
     newRoom->userList = initializeUserList(newRoom->userList);
     newRoom->next     = NULL;
     newRoom->prev     = NULL;
