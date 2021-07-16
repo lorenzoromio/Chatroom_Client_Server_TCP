@@ -53,7 +53,7 @@ room_list *initializeRoomList(room_list *roomList)
     roomList->tail  = NULL;
     struct sockaddr_in admin_addr;
     admin_addr.sin_family = AF_INET;
-    mkdir("chatLog", 0755);
+    mkdir(LOG_FOLDER, 0755);
     user_t *admin         = createUser(admin_addr, -1); //crea utente Admin con uid -1
     strcpy(admin->username, "Admin");
     addRoom(roomList, createRoom("General", admin)); //crea la stanza di default, non può essere eliminata
@@ -78,7 +78,7 @@ room_t *createRoom(char *roomName, user_t *owner)
     newRoom->owner = owner;
     strcpy(newRoom->name, roomName);
     logError("");
-    snprintf(newRoom->log_filename,sizeof(newRoom->log_filename),"log/%s.log",roomName);
+    snprintf(newRoom->log_filename,sizeof(newRoom->log_filename),"%s/%s.log",LOG_FOLDER,roomName);
     printf("%s\n",newRoom->log_filename);
     newRoom->userList = initializeUserList(newRoom->userList);
     newRoom->next     = NULL;
