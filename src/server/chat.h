@@ -43,10 +43,10 @@ typedef struct room_list
 typedef struct room_s
 {
     uid_t             uid;
-    char              name[25];
+    char              name[MAX_ROOMNAME_LENGTH];
     struct user_s *   owner;
     struct user_list *userList;
-    char              log_filename[30];
+    char              log_filename[MAX_ROOMNAME_LENGTH + 10];
     struct room_s *   next;
     struct room_s *   prev;
 } room_t;

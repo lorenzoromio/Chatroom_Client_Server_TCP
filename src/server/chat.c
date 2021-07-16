@@ -27,6 +27,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -52,6 +53,7 @@ room_list *initializeRoomList(room_list *roomList)
     roomList->tail  = NULL;
     struct sockaddr_in admin_addr;
     admin_addr.sin_family = AF_INET;
+    mkdir("chatLog", 0755);
     user_t *admin         = createUser(admin_addr, -1); //crea utente Admin con uid -1
     strcpy(admin->username, "Admin");
     addRoom(roomList, createRoom("General", admin)); //crea la stanza di default, non può essere eliminata
@@ -75,8 +77,9 @@ room_t *createRoom(char *roomName, user_t *owner)
     newRoom->uid   = room_uid++;
     newRoom->owner = owner;
     strcpy(newRoom->name, roomName);
-    strcpy(newRoom->log_filename, roomName);
-    strcat(newRoom->log_filename, ".log");
+    logError("");
+    snprintf(newRoom->log_filename,sizeof(newRoom->log_filename),"log/%s.log",roomName);
+    printf("%s\n",newRoom->log_filename);
     newRoom->userList = initializeUserList(newRoom->userList);
     newRoom->next     = NULL;
     newRoom->prev     = NULL;
