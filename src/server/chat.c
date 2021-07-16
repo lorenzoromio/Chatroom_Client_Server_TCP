@@ -123,12 +123,12 @@ void removeRoomFromList(room_list *roomList, room_t *room)
     // logInfo("START removeRoomFromList");
     pthread_mutex_lock(&roomList->mutex);
 
-    if (room->uid == 0)
+    if (room->uid == roomList->head->uid)
     {
         return;
     }
 
-    printf("\tDeleting Room %d - %s\n", room->uid, room->name);
+    logWarn("\tDeleting Room %d - %s", room->uid, room->name);
 
     // room is head
     if (room->prev == NULL)
