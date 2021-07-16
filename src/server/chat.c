@@ -405,7 +405,8 @@ void printUserList(user_list *userList)
     pthread_mutex_lock(&userList->mutex);
     for (user = userList->head; user; user = user->next)
     {
-        printf("    %d - %s\n", user->uid, user->username);
+        printf("    %d - %s  [%s:%d]", user->uid, user->username, 
+                                      inet_ntoa(user->addr.sin_addr), user->addr.sin_port);
     }
 
     pthread_mutex_unlock(&userList->mutex);
