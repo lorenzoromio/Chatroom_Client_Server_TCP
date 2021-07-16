@@ -249,7 +249,6 @@ user_t *createUser(struct sockaddr_in addr, int sock_fd)
     newUser->addr     = addr;
     newUser->sock_fd  = sock_fd;
     newUser->username = (char *)malloc(MAX_USERNAME_LENGTH + 1 * sizeof(char));
-   // snprintf(newUser->ip_port, 21, "%s:%d", inet_ntoa(addr.sin_addr), addr.sin_port);
     newUser->color = (char *)malloc(10 * sizeof(char));
     strcpy(newUser->color, colors[idx]);
 
