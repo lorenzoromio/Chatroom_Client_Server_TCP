@@ -759,7 +759,7 @@ int isAdminLogged(room_list *roomList)
         pthread_mutex_lock(&userList->mutex);
         for (user = room->userList->head; user; user = user->next)
         {
-            if (user->uid == 0)
+            if (user->uid == roomList->head->owner->uid)
             {
                 pthread_mutex_unlock(&userList->mutex);
                 pthread_mutex_unlock(&roomList->mutex);
