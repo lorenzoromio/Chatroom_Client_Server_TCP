@@ -27,8 +27,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/stat.h>
 #include <string.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 #include <arpa/inet.h>
@@ -54,7 +54,7 @@ room_list *initializeRoomList(room_list *roomList)
     struct sockaddr_in admin_addr;
     admin_addr.sin_family = AF_INET;
     mkdir(LOG_FOLDER, 0755);
-    user_t *admin         = createUser(admin_addr, -1); //crea utente Admin con uid -1
+    user_t *admin = createUser(admin_addr, -1); //crea utente Admin con uid -1
     strcpy(admin->username, "Admin");
     addRoom(roomList, createRoom("General", admin)); //crea la stanza di default, non può essere eliminata
     removeUserFromRoom(admin);
@@ -77,13 +77,13 @@ room_t *createRoom(char *roomName, user_t *owner)
     newRoom->uid   = room_uid++;
     newRoom->owner = owner;
     strcpy(newRoom->name, roomName);
-    snprintf(newRoom->log_filename,sizeof(newRoom->log_filename),"%s/%s.log",LOG_FOLDER,roomName);
+    snprintf(newRoom->log_filename, sizeof(newRoom->log_filename), "%s/%s.log", LOG_FOLDER, roomName);
     newRoom->userList = initializeUserList(newRoom->userList);
     newRoom->next     = NULL;
     newRoom->prev     = NULL;
-    logInfo("New room created: %s", newRoom->name);
+    logInfo("New room created: [%d -%s]", newRoom->uid, newRoom->name);
     addUserToRoom(newRoom, owner);
-        
+
     FILE *log_fp = fopen(newRoom->log_filename, "a+");
     fclose(log_fp);
     return newRoom;
@@ -111,7 +111,7 @@ void addRoom(room_list *roomList, room_t *newRoom)
 
     roomList->count++;
 
-    logInfo("ADD %s TO LIST", roomList->tail->name);
+    logInfo("[%d -%s] added to list", newRoom->uid, newRoom->name);
     pthread_mutex_unlock(&roomList->mutex);
 }
 
@@ -125,8 +125,6 @@ void removeRoomFromList(room_list *roomList, room_t *room)
     {
         return;
     }
-
-  
 
     // room is head
     if (room->prev == NULL)
@@ -199,7 +197,7 @@ void printRoomList(room_list *roomList)
     room_t *room;
     for (room = roomList->head; room; room = room->next)
     {
-        printf(CYAN"[%d - %s]"RESET" (%d user online) own by (%d - %s)\n",
+        printf(CYAN "[%d - %s]" RESET " (%d user online) own by (%d - %s)\n",
                room->uid, room->name, room->userList->count, room->owner->uid, room->owner->username);
         printUserList(room->userList);
     }
@@ -246,7 +244,7 @@ user_t *createUser(struct sockaddr_in addr, int sock_fd)
     newUser->addr     = addr;
     newUser->sock_fd  = sock_fd;
     newUser->username = (char *)malloc(MAX_USERNAME_LENGTH + 1 * sizeof(char));
-    newUser->color = (char *)malloc(10 * sizeof(char));
+    newUser->color    = (char *)malloc(10 * sizeof(char));
     strcpy(newUser->color, colors[idx]);
 
     return newUser;
@@ -273,7 +271,9 @@ void addUserToRoom(room_t *room, user_t *newUser)
         userList->tail->next = newUser;
         userList->tail       = newUser;
     }
-    logInfo(GREEN"Insert User (%d - %s) to room [%d - %s]"RESET, newUser->uid, newUser->username, room->uid, room->name);
+    logInfo(GREEN "Insert User (%d - %s) to room [%d - %s]" RESET,
+            newUser->uid, newUser->username, room->uid, room->name);
+
     room->userList->count++;
 
     pthread_mutex_unlock(&room->userList->mutex);
@@ -283,14 +283,16 @@ void addUserToRoom(room_t *room, user_t *newUser)
     sendMessage(buffer, newUser);
     bzero(buffer, sizeof(buffer));
 
-    snprintf(buffer,BUFFER_SIZE, GREEN "++ %s has joined %s ++\n" RESET, newUser->username, newUser->room->name);
-   // printf("%s", buffer);
+    snprintf(buffer, BUFFER_SIZE, GREEN "++ (%d - %s) has joined [%d - %s] ++\n" RESET,
+             newUser->uid, newUser->username, newUser->room->uid, newUser->room->name);
+
     sendBroadcastMessage(buffer, newUser);
 }
 
 // Elimina un utente dalla lista di utenti presenti nella stanza
 void removeUserFromRoom(user_t *user)
 {
+    char buffer[BUFFER_SIZE];
     if (user->room)
     {
         user_list *userList = user->room->userList;
@@ -329,21 +331,22 @@ void removeUserFromRoom(user_t *user)
 
         pthread_mutex_unlock(&userList->mutex);
 
-        logInfo(RED"Remove User (%d - %s) from room [%d - %s]"RESET, user->uid, user->username, user->room->uid, user->room->name);
-        char buffer[BUFFER_SIZE];
+        logInfo(RED "Remove User (%d - %s) from room [%d - %s]" RESET,
+                user->uid, user->username, user->room->uid, user->room->name);
+
         sendMessage(CLEAR_TERMINAL, user);
-       
-        snprintf(buffer, BUFFER_SIZE, RED "-- You have been removed from %s --\n" RESET, user->room->name);
+
+        snprintf(buffer, BUFFER_SIZE, RED "-- You have been removed from [%d - %s] --\n" RESET,
+                 user->room->uid, user->room->name);
         sendMessage(buffer, user);
-       logDebug("ok");
         bzero(buffer, sizeof(buffer));
-        snprintf(buffer,BUFFER_SIZE, RED "-- %s has left %s --\n" RESET, user->username, user->room->name);
+        snprintf(buffer, BUFFER_SIZE, RED "-- (%d - %s) has left [%d - %s] --\n" RESET,
+                 user->uid, user->username, user->room->uid, user->room->name);
         sendBroadcastMessage(buffer, user);
-       
+
         bzero(buffer, sizeof(buffer));
 
         user->room = NULL;
-
     }
 }
 
@@ -372,7 +375,7 @@ void userLogOut(room_list *roomList, user_t *userLogOut)
     {
         if (room->owner == userLogOut)
         {
-            logWarn("%s own %s", userLogOut->username, room->name);
+
             if (userLogOut->next)
             {
                 room->owner = userLogOut->next;
@@ -385,6 +388,8 @@ void userLogOut(room_list *roomList, user_t *userLogOut)
                 //removeRoomFromList(roomList, room);
                 //pthread_mutex_lock(&roomList->mutex);
             }
+            logWarn("(%d - %s) owned [%d -%s]: ownership transferred to (%d - %s)",
+                    userLogOut->uid, userLogOut->username, room->uid, room->name, room->owner->uid, room->owner->username);
         }
     }
 
@@ -403,8 +408,8 @@ void printUserList(user_list *userList)
     pthread_mutex_lock(&userList->mutex);
     for (user = userList->head; user; user = user->next)
     {
-        printf("    %d - %s  [%s:%d]", user->uid, user->username, 
-                                      inet_ntoa(user->addr.sin_addr), user->addr.sin_port);
+        printf("    %d - %s  [%s:%d]", user->uid, user->username,
+               inet_ntoa(user->addr.sin_addr), user->addr.sin_port);
     }
 
     pthread_mutex_unlock(&userList->mutex);
