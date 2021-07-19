@@ -743,7 +743,7 @@ void helpDeleteRoom(room_list *roomList, room_t *room, user_t *user)
     {
         sendMessage(RED "Deleting room...\n" RESET, user);
         sendBroadcastMessage(RED "Deleting room...\n" RESET, user);
-        logWarn("(%d - %s) is deleting Room %d - %s",user->uid, user->username, room->uid, room->name);
+        logWarn("(%d - %s) is deleting room [%d - %s]",user->uid, user->username, room->uid, room->name);
         usleep(500);
         removeRoomFromList(roomList, room);
     }
