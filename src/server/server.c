@@ -661,7 +661,7 @@ void helpNewRoom(user_t *user)
 // ritorna TRUE se c'è spazio, FALSE se non c'è spazio
 int cleanEmptyRooms(room_list *roomList)
 {
-    if (roomList->roomCount < MAX_ROOM_COUNT)
+    if (roomList->count < MAX_ROOM_COUNT)
     {
         logDebug("list not full");
         return 1; //if list not full
