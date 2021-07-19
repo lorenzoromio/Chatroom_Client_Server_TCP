@@ -126,7 +126,7 @@ void removeRoomFromList(room_list *roomList, room_t *room)
         return;
     }
 
-    logWarn("Deleting Room %d - %s", room->uid, room->name);
+  
 
     // room is head
     if (room->prev == NULL)
