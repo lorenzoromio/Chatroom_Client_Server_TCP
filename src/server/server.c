@@ -687,6 +687,13 @@ void helpChangeRoom(user_t *user)
     char buffer[BUFFER_SIZE] = {'\0'};
     int  roomUid;
     int  receive;
+    logInfo("%s called /changeroom", user->username);
+    if(roomList->count == 1) {
+        sendMessage(RED "Sorry, this is the only room available. \nYou can create another room typing /newroom\n" RESET, user);
+        logWarn("No rooms available");
+        return;
+    }
+
     sendMessage(MAGENTA "Select a room by number: \n" RESET, user);
     helpListRooms(user);
     receive = recv(user->sock_fd, buffer, BUFFER_SIZE, 0);
