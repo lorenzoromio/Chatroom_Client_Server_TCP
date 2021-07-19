@@ -32,8 +32,7 @@
 
 typedef struct room_list
 {
-    volatile unsigned int roomCount;
-    volatile unsigned int usersCount;
+    volatile unsigned int count;
     struct room_s *       head;
     struct room_s *       tail;
     pthread_mutex_t       mutex;
