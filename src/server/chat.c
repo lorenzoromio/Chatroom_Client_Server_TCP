@@ -111,7 +111,7 @@ void addRoom(room_list *roomList, room_t *newRoom)
 
     roomList->count++;
 
-    logInfo("[%d -%s] added to list", newRoom->uid, newRoom->name);
+    logInfo("[%d - %s] added to list", newRoom->uid, newRoom->name);
     pthread_mutex_unlock(&roomList->mutex);
 }
 
@@ -283,8 +283,8 @@ void addUserToRoom(room_t *room, user_t *newUser)
     sendMessage(buffer, newUser);
     bzero(buffer, sizeof(buffer));
 
-    snprintf(buffer, BUFFER_SIZE, GREEN "++ (%d - %s) has joined [%d - %s] ++\n" RESET,
-             newUser->uid, newUser->username, newUser->room->uid, newUser->room->name);
+    snprintf(buffer, BUFFER_SIZE, GREEN "++ %s has joined %s ++\n" RESET,
+             newUser->username, newUser->room->name);
 
     sendBroadcastMessage(buffer, newUser);
 }
@@ -340,8 +340,8 @@ void removeUserFromRoom(user_t *user)
                  user->room->uid, user->room->name);
         sendMessage(buffer, user);
         bzero(buffer, sizeof(buffer));
-        snprintf(buffer, BUFFER_SIZE, RED "-- (%d - %s) has left [%d - %s] --\n" RESET,
-                 user->uid, user->username, user->room->uid, user->room->name);
+        snprintf(buffer, BUFFER_SIZE, RED "-- %s has left %s --\n" RESET,
+                user->username, user->room->name);
         sendBroadcastMessage(buffer, user);
 
         bzero(buffer, sizeof(buffer));
