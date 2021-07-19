@@ -179,7 +179,7 @@ room_t *selectRoom(room_list *roomList, int uid)
     {
         if (room->uid == uid)
         {
-            printf("Found [%d - %s]\n", room->uid, room->name);
+            printf("Found room [%d - %s]\n", room->uid, room->name);
             return room;
         }
     }
@@ -388,7 +388,7 @@ void userLogOut(room_list *roomList, user_t *userLogOut)
                 //removeRoomFromList(roomList, room);
                 //pthread_mutex_lock(&roomList->mutex);
             }
-            logWarn("(%d - %s) owned [%d -%s]: ownership transferred to (%d - %s)",
+            logWarn("(%d - %s) owned [%d - %s]: ownership transferred to (%d - %s)",
                     userLogOut->uid, userLogOut->username, room->uid, room->name, room->owner->uid, room->owner->username);
         }
     }
