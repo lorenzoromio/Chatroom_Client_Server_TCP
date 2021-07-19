@@ -376,9 +376,9 @@ void userLogOut(room_list *roomList, user_t *userLogOut)
         if (room->owner == userLogOut)
         {
 
-            if (userLogOut->next)
+            if (room->userList->head)
             {
-                room->owner = userLogOut->next;
+                room->owner = room->userList->head;
                 sendMessage(GREEN "** Now you are the owner of this room **\n" RESET, room->owner);
             }
             else
