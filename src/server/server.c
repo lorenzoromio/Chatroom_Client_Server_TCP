@@ -592,9 +592,18 @@ void helpListRooms(user_t *user)
     room_t *room;
     for (room = roomList->head; room; room = room->next)
     {
-        if (user->room == room)
+
+        if(user->room == room && user->uid == room->owner->uid) {
+             snprintf(msg, sizeof(msg), CYAN "[%d - %s]" RESET " (%d users online) own by "GREEN"(%d - %s)"RESET"\n",
+                     room->uid, room->name, room->userList->count, room->owner->uid, room->owner->username);
+        }
+        else if (user->room == room)
         {
             snprintf(msg, sizeof(msg), CYAN "[%d - %s]" RESET " (%d users online) own by (%d - %s)\n",
+                     room->uid, room->name, room->userList->count, room->owner->uid, room->owner->username);
+        }else if (user->uid == room->owner->uid)
+        {
+            snprintf(msg, sizeof(msg), "[%d - %s] (%d users online) own by "GREEN"(%d - %s)"RESET"\n",
                      room->uid, room->name, room->userList->count, room->owner->uid, room->owner->username);
         }
         else
