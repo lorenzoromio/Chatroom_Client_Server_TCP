@@ -81,9 +81,9 @@ room_t *createRoom(char *roomName, user_t *owner)
     newRoom->userList = initializeUserList(newRoom->userList);
     newRoom->next     = NULL;
     newRoom->prev     = NULL;
-    addUserToRoom(newRoom, owner);
-    
     logInfo("New room created: %s", newRoom->name);
+    addUserToRoom(newRoom, owner);
+        
     FILE *log_fp = fopen(newRoom->log_filename, "a+");
     fclose(log_fp);
     return newRoom;
@@ -164,9 +164,8 @@ void removeRoomFromList(room_list *roomList, room_t *room)
     {
         changeUserRoom(room->userList->head, roomList->head);
     }
-    logWarn("DELETE ROOM [%s]", room->name);
     remove(room->log_filename);
-    printf("file deleted -> %s\n", room->log_filename);
+    logInfo("file deleted -> %s", room->log_filename);
     free(room->userList);
     room->userList = NULL;
     free(room);
@@ -339,7 +338,6 @@ void removeUserFromRoom(user_t *user)
        logDebug("ok");
         bzero(buffer, sizeof(buffer));
         snprintf(buffer,BUFFER_SIZE, RED "-- %s has left %s --\n" RESET, user->username, user->room->name);
-        //printf("%s", buffer);
         sendBroadcastMessage(buffer, user);
        
         bzero(buffer, sizeof(buffer));

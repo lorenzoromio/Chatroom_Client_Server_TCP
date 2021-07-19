@@ -168,10 +168,10 @@ int main(int argc, char **argv)
     printf("Listening for connection on %s:%d\n",
            config.host, config.port);
     printf("\n"
-        "? -- Print this menu\n"
-        "p -- Print room list\n"
-        "c -- Clear screen\n"
-        "q -- Quit\n");
+           "? -- Print this menu\n"
+           "p -- Print room list\n"
+           "c -- Clear screen\n"
+           "q -- Quit\n");
 
     // TODO remove me
     // printf("Use  \"./client %s %d\" or \"telnet %s -p %d\" for connecet\n",
@@ -583,7 +583,7 @@ void help(user_t *user)
 void helpListRooms(user_t *user)
 {
     char msg[BUFFER_SIZE];
-    logInfo("%s needs rooms", user->username);
+    logInfo("%s called /rooms", user->username);
     //printRoomList(roomList);
 
     sendMessage(MAGENTA "List rooms\n" RESET, user);
@@ -638,6 +638,7 @@ void helpNewRoom(user_t *user)
 {
     char roomName[MAX_ROOMNAME_LENGTH] = {'\0'};
     int  receive;
+    logInfo("%s called /newroom", user->username);
     if (cleanEmptyRooms(roomList))
     {
         sendMessage(MAGENTA "Enter new room name:\n" RESET, user);
@@ -730,7 +731,7 @@ void helpChangeRoom(user_t *user)
 // Elimina la stanza
 void helpDeleteRoom(room_list *roomList, room_t *room, user_t *user)
 {
-
+    logInfo("%s called /deleteroom", user->username);
     if (room != roomList->head && (room->owner == user || user->uid == 0))
     {
         sendMessage(RED "Deleting room...\n" RESET, user);
