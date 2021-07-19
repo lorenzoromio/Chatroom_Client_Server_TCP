@@ -549,7 +549,7 @@ void keepLog(char *msg, user_t *user)
 // Ripristina la cronologia dei messaggi della stanza in cui è l'utente
 void restoreLog(user_t *user)
 {
-    logInfo("restore log for (%d)%s", user->uid, user->username);
+    logInfo("restore log for (%d - %s)", user->uid, user->username);
     FILE *log_fd              = fopen(user->room->log_filename, "r");
     char  buffer[BUFFER_SIZE] = {'\0'};
     if (log_fd == NULL)
