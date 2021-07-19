@@ -47,7 +47,7 @@ room_list *initializeRoomList(room_list *roomList)
         exit(EXIT_FAILURE);
     }
 
-    roomList->roomCount = 0;
+    roomList->count = 0;
     roomList->mutex = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
     roomList->head  = NULL;
     roomList->tail  = NULL;
@@ -109,7 +109,7 @@ void addRoom(room_list *roomList, room_t *newRoom)
         roomList->tail       = newRoom;
     }
 
-    roomList->roomCount++;
+    roomList->count++;
 
     logInfo("ADD %s TO LIST", roomList->tail->name);
     pthread_mutex_unlock(&roomList->mutex);
@@ -126,7 +126,7 @@ void removeRoomFromList(room_list *roomList, room_t *room)
         return;
     }
 
-    logWarn("\tDeleting Room %d - %s", room->uid, room->name);
+    logWarn("Deleting Room %d - %s", room->uid, room->name);
 
     // room is head
     if (room->prev == NULL)
@@ -170,7 +170,7 @@ void removeRoomFromList(room_list *roomList, room_t *room)
     room->userList = NULL;
     free(room);
     room = NULL;
-    roomList->roomCount--;
+    roomList->count--;
 }
 
 // Restituisce una stanza partendo da un uid
@@ -193,7 +193,7 @@ room_t *selectRoom(room_list *roomList, int uid)
 void printRoomList(room_list *roomList)
 {
     // logInfo("START PRINT ROOM LIST");
-    logInfo("Print room list (%d room) - (%d users)", roomList->roomCount, getTotalUserCount(roomList));
+    logInfo("Print room list (%d room) - (%d users)", roomList->count, getTotalUserCount(roomList));
 
     pthread_mutex_lock(&roomList->mutex);
     room_t *room;
@@ -420,7 +420,6 @@ unsigned int getTotalUserCount(room_list *roomList)
     {
         usersCount += room->userList->count;
     }
-    roomList->usersCount = usersCount;
     pthread_mutex_unlock(&roomList->mutex);
     return usersCount;
 }
